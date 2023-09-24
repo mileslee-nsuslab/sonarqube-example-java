@@ -4,6 +4,10 @@ public class InheritanceLimit {
   public class Level1 {
     
   }
+
+  public class Level100 {
+    
+  }
   public class Level2 extends Level1 {
     
   }
