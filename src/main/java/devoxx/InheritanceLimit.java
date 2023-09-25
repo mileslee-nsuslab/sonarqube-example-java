@@ -5,14 +5,6 @@ public class InheritanceLimit {
     
   }
 
-  public class Level100 {
-    
-  }
-  public class Level1003 {
-    
-  }
-
-
   public class Level2 extends Level1 {
     
   }
