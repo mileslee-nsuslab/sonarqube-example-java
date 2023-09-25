@@ -8,6 +8,10 @@ public class InheritanceLimit {
   public class Level2 extends Level1 {
     
   }
+
+  public class Level177 {
+    
+  }
   
   
   public class Level3 extends Level2 {
