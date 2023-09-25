@@ -36,3 +36,14 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.host.url=https://devops-sonarqube.greatgameplatform.com -Dsonar.projectKey=mileslee-nsuslab_sonarqube-example-java_AYq1vNi9gBddw1EpPUVt
+      - name: Check Quality Gate
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          # Wait for SonarQube background tasks to complete and check Quality Gate status
+          sleep 20 # You may need to adjust the sleep duration based on your project's analysis time
+          STATUS=$(curl -s -u $SONAR_TOKEN: 'https://devops-sonarqube.greatgameplatform.com/api/qualitygates/project_status?projectKey=mileslee-nsuslab_sonarqube-example-java_AYq1vNi9gBddw1EpPUVt' | jq -r .projectStatus.status)
+          if [ "$STATUS" != "OK" ]; then
+            echo "Quality gate fails"
+            exit 1
+          fi
